@@ -51,3 +51,49 @@ spec:
     run: prometheus-webhook
   type: ClusterIP
   ```
+
+## alertmanager配置webhook
+```
+  config:
+    global:
+      resolve_timeout: 5m
+      wechat_api_url: https://qyapi.weixin.qq.com/cgi-bin/
+    inhibit_rules:
+      - source_matchers:
+          - 'severity = critical'
+        target_matchers:
+          - 'severity =~ warning|info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'severity = warning'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'alertname = InfoInhibitor'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+    route:
+      group_by: ['alertname', 'namespace']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      receiver: 'webhook-alert'
+      routes:
+      - receiver: 'webhook-alert'
+        matchers:
+          - alertname =~ "InfoInhibitor|Watchdog"
+    receivers:
+    - name: 'webhook-alert'
+      webhook_configs:
+      - send_resolved: true
+        url: 'http://prometheus-webhook.prometheus-stack.svc.cluster.local:80/adapter/wx'
+    templates:
+    - '/etc/alertmanager/config/*.tmpl'
+ ```
