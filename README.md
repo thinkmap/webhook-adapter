@@ -5,7 +5,7 @@ node index.js --port=8080 --adapter=./prometheusalert/wx.js=/wx=https://qyapi.we
 
 ## docker
 ```bash
-docker run --name webhook-adapter -p 8080:80 -d guyongquan/webhook-adapter --adapter=/app/prometheusalert/wx.js=/wx=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={key} --adapter=/app/prometheusalert/dingtalk.js=/dingtalk=https://oapi.dingtalk.com/robot/send?access_token={token}#{secret}
+docker run --name webhook-adapter -p 8080:80 -d registry.cn-shanghai.aliyuncs.com/c-things/webhook-adapter:v1.0.0 --adapter=/app/prometheusalert/wx.js=/wx=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={key} --adapter=/app/prometheusalert/dingtalk.js=/dingtalk=https://oapi.dingtalk.com/robot/send?access_token={token}#{secret}
 ```
 ## k8s
 ```cat prometheus-webhook.yaml
@@ -28,7 +28,7 @@ spec:
       containers:
       - args:
         - --adapter=/app/prometheusalert/wx.js=/adapter/wx=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4ee7fb39-d381-49ca-b33c-f35acd61d8f8
-        image: registry.cn-hangzhou.aliyuncs.com/guyongquan/webhook-adapter  
+        image: registry.cn-shanghai.aliyuncs.com/c-things/webhook-adapter:v1.0.0  
         name: prometheus-webhook
         ports:
         - containerPort: 80
