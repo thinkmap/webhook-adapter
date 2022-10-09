@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/guyongquan/webhook-adapter-base
+FROM harbor.devops.mcd.com.cn/data-public/webhook-adapter-base:v1.0.0
 ADD index.js /app/
 ADD prometheusalert /app/prometheusalert
 EXPOSE 80
