@@ -12,7 +12,6 @@ ENV LANG=en_US.utf8
 RUN apk add --no-cache \
 # grab su-exec for easy step-down from root
 		'su-exec>=0.2' \
-# add tzdata for https://github.com/docker-library/redis/issues/138
 		tzdata
 ADD package.json /app/dockerbase/
 RUN cd /app/dockerbase && npm install --only=prod -g --registry=https://registry.npm.taobao.org && ln -s /app/dockerbase/node_modules /app/node_modules
