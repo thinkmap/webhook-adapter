@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guyongquan/webhook-adapter.git"
+    "url": "git+https://github.com/thinkmap/webhook-adapter.git"
   },
   "keywords": [
     "webhook"
@@ -23,7 +23,7 @@
   "author": "guyongquan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/guyongquan/webhook-adapter/issues"
+    "url": "https://github.com/thinkmap/webhook-adapter/issues"
   },
-  "homepage": "https://github.com/guyongquan/webhook-adapter#readme"
+  "homepage": "https://github.com/thinkmap/webhook-adapter#readme"
 }
