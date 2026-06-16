@@ -17,14 +17,14 @@ exports.template = function(body) {
     if ((body.status)=="firing") {
     var content = alerts.map(
         alert => {
-            return [`## Name:${alert.labels.alertname}`, "### Labels:"]
-            .concat(Object.entries(alert.labels).map(label => `<font color="comment">${label[0]}:</font>${label[1]}`))
+            return [`## Name: ${alert.labels.alertname}`, "### Labels:"]
+            .concat(Object.entries(alert.labels).map(label => `<font color="comment">${label[0]}: </font>${label[1]}`))
             .concat("### Annotations:")
-            .concat(Object.entries(alert.annotations).map(annotation => `<font color="comment">${annotation[0]}:</font>${annotation[1]}`))
-            .concat(`###### 故障时间:<font color="warning">${formatTimeStamp((Date.parse(alert.startsAt)))}</font>`)
+            .concat(Object.entries(alert.annotations).map(annotation => `<font color="comment">${annotation[0]}: </font>${annotation[1]}`))
+            .concat(`###### Failure Time: <font color="warning">${formatTimeStamp((Date.parse(alert.startsAt)))}</font>`)
             .join("\n")
         }
-    ).concat(`<font color="comment">告警状态:</font><font color="${body.status === 'firing' ? 'warning' : 'info'}">${body.status}</font>`).join("\n\n");
+    ).concat(`###### Alarm Status: <font color="${body.status === 'firing' ? 'warning' : 'info'}">${body.status}</font>`).join("\n\n");
     return {
         
         msgtype: "markdown",
@@ -40,13 +40,13 @@ exports.template = function(body) {
             .concat(Object.entries(alert.labels).map(label => `<font color="comment">${label[0]}: </font>${label[1]}`))
             .concat("### Annotations:")
             .concat(Object.entries(alert.annotations).map(annotation => `<font color="comment">${annotation[0]}: </font>${annotation[1]}`))
-            .concat(`###### 故障时间: <font color="warning">${formatTimeStamp((Date.parse(alert.startsAt)))}</font>`)
-            .concat(`###### 恢复时间: <font color="info">${formatTimeStamp((Date.parse(alert.endsAt)))}</font>`)
+            .concat(`###### Failure Time: <font color="warning">${formatTimeStamp((Date.parse(alert.startsAt)))}</font>`)
+            .concat(`###### Recovery Time: <font color="info">${formatTimeStamp((Date.parse(alert.endsAt)))}</font>`)
             .join("\n")
         }
-    ).concat(`<font color="comment">告警状态: </font><font color="${body.status === 'firing' ? 'warning' : 'info'}">${body.status}</font>`).join("\n\n");
+    ).concat(`###### Alarm Status: <font color="${body.status === 'firing' ? 'warning' : 'info'}">${body.status}</font>`).join("\n\n");
     return {
-        
+
         msgtype: "markdown",
         markdown: {
             content: content
