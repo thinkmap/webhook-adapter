@@ -16,7 +16,8 @@ spec:
       containers:
       - args:
         - --adapter=/app/prometheusalert/wx.js=/adapter/wx=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=7f139aaa-bdda-4990-97ec-48559d3849c5
-        image: registry.cn-shanghai.aliyuncs.com/c-things/webhook-adapter:v1.0.0 
+        - --adapter=/app/prometheusalert/wx_wecom.js=/adapter/wecom=https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=7f139aaa-bdda-4990-97ec-48559d3849c5
+        image: registry.cn-shanghai.aliyuncs.com/dc-studio/webhook-adapter:v3.0.0 
         name: prometheus-webhook
         ports:
         - containerPort: 80
